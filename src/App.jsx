@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
 import { CityIntelligenceMap as CityMap } from './pages/CityMap';
+import { ReportIssue } from './pages/ReportIssue';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/map" element={<CityMap />} />
+        <Route path="/report" element={<ReportIssue />} />
       </Routes>
     </Router>
   );

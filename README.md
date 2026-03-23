@@ -1,16 +1,29 @@
-# React + Vite
+# CityScope: Neural Nexus
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**The autonomous cyber-intelligence core. Real-time urban analytics driven by predictive machine learning.**
 
-Currently, two official plugins are available:
+CityScope is a dynamic, dark-mode platform designed to act as the central "brain" for urban environments. It bridges the gap between raw city data and instant, actionable intelligence for authority officers and city planners. The frontend application is built with React, Vite, and Tailwind CSS, featuring modern glassmorphism, glowing micro-animations, and a responsive layout.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- **Landing Page (Neural Nexus):** A highly interactive, cyber-themed portal presenting the core pillars of the CityScope platform.
+- **Authority Dashboard (Command Center):** A secure intelligence hub offering real-time KPIs, priority hotspots, city-wide sentiment charts, and live data telemetry.
+- **City Intelligence Map:** An interactive geospatial visualization mapping infrastructure anomalies, safety segments, and sentiment zones across the city using real data layers.
 
-## React Compiler
+## Tech Stack
+- **Framework:** React 19 + Vite
+- **Styling:** Tailwind CSS + custom glowing UI utilities
+- **Animations:** Framer Motion
+- **Maps:** Leaflet & React-Leaflet
+- **Charts:** Recharts
+- **Icons:** Lucide-React
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting Started
 
-## Expanding the ESLint configuration
+First, ensure you have Node.js installed. Then, clone the repository and run the development server:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.

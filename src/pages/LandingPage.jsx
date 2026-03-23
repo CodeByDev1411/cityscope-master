@@ -72,6 +72,9 @@ const HeroSection = () => {
           <button onClick={() => navigate('/map')} className="px-8 py-4 rounded-xl bg-slate-800/50 backdrop-blur-md border border-white/10 hover:border-white/20 text-white font-medium transition-all hover:bg-slate-800/80">
             View Live Intel
           </button>
+          <button onClick={() => navigate('/report')} className="px-8 py-4 rounded-xl bg-indigo-500/20 backdrop-blur-md border border-indigo-500/30 text-indigo-300 font-medium hover:bg-indigo-500/30 transition-all shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+            Report Civic Issue
+          </button>
         </div>
       </div>
 
