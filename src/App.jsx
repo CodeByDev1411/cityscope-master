@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import Dashboard from './pages/Dashboard';
-import { CityIntelligenceMap as CityMap } from './pages/CityMap';
+import CityMap from './pages/CityMap';
 import { ReportIssue } from './pages/ReportIssue';
 
 function App() {

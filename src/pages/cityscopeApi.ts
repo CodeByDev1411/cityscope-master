@@ -27,10 +27,50 @@ export type SentimentZone = {
   left: string;
 };
 
+export type CrimeArea = {
+  area_name: string;
+  lat: number;
+  lng: number;
+  crime_score: number;
+  intensity: number;
+  risk_level: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+  murder: number;
+  rape: number;
+  gangrape: number;
+  robbery: number;
+  theft: number;
+  assault_murders: number;
+  sexual_harassment: number;
+  totalcrime: number;
+};
+
+export type CrimeSummary = {
+  status: 'success';
+  total_areas: number;
+  risk_distribution: Record<string, number>;
+  most_dangerous: Array<{
+    nm_pol: string;
+    crime_score_normalized: number;
+    risk_level: string;
+  }>;
+  safest: Array<{
+    nm_pol: string;
+    crime_score_normalized: number;
+    risk_level: string;
+  }>;
+};
+
+export type CrimeHeatPoint = {
+  lat: number;
+  lng: number;
+  weight: number;
+};
+
 // --- Real Data Fetching (Overpass API) ---
 
 const BBOX = '28.50,77.10,28.70,77.35'; // Central/South Delhi bounding box
 const OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
 // Helper to delay between requests if needed
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
@@ -161,3 +201,55 @@ export async function fetchSentimentDelhi(): Promise<SentimentZone[]> {
   }
 }
 
+export async function fetchCrimeData(params?: {
+  limit?: number;
+  risk?: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+  sort?: 'asc' | 'desc';
+}): Promise<CrimeArea[]> {
+  const searchParams = new URLSearchParams();
+
+  if (params?.limit) searchParams.set('limit', String(params.limit));
+  if (params?.risk) searchParams.set('risk', params.risk);
+  if (params?.sort) searchParams.set('sort', params.sort);
+
+  const query = searchParams.toString();
+  const url = `${BACKEND_URL}/api/unsafe-areas${query ? `?${query}` : ''}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return Array.isArray(data.data) ? data.data : [];
+  } catch (error) {
+    console.warn('Crime API failed, falling back', error);
+    return [];
+  }
+}
+
+export async function fetchCrimeSummary(): Promise<CrimeSummary | null> {
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/summary`);
+    const data = await res.json();
+    return data?.status === 'success' ? data : null;
+  } catch (error) {
+    console.warn('Crime summary API failed', error);
+    return null;
+  }
+}
+
+export async function fetchCrimeHeatmap(): Promise<CrimeHeatPoint[]> {
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/heatmap-data`);
+    const data = await res.json();
+
+    if (!Array.isArray(data.data)) return [];
+
+    return data.data.map((point: any) => ({
+      lat: point.lat,
+      lng: point.lng,
+      weight: Math.max(0, Math.min(1, Number(point.weight) / 100)),
+    }));
+  } catch (error) {
+    console.warn('Crime heatmap API failed', error);
+    return [];
+  }
+}
