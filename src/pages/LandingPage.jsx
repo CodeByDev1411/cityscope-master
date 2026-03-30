@@ -479,7 +479,6 @@ function MobileCrimeSection() {
 /* ── Main App ─────────────────────────────────────────────── */
 export default function LandingPage() {
   const [showReport, setShowReport] = useState(false);
-
   return (
     <div className="min-h-screen bg-[#020617] text-white selection:bg-cyan-500/30">
       {/* Bg glows */}
